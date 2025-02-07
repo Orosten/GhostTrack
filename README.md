@@ -1,5 +1,5 @@
 # GhostTrack - Surveillance des Rails Hantés
-
+-- Gabriel Namias, Enzo Pace, Sinan Coban
 ## Contexte
 **GhostTrack** est une application destinée aux zones ferroviaires "hantées" par des fantômes locaux qui influencent la circulation des trains et perturbent les trajets.
 
