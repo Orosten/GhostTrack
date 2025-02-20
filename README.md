@@ -18,5 +18,4 @@ Une application de suivi des manifestations paranormales et de gestion des inter
 - **Agents de Terrain Paranormal** : Enregistrent les données sur les fantômes rencontrés lors des interventions.
 - **Administrateur Système** : Gère l’application et supervise les activités fantomatiques.
 
-> *Protégé par le droit d'auteur G.N.*
 
