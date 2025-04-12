@@ -1,24 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-  </padding>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esiee.ghosttrack.controller.AdminController">
+  <top>
+    <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #3a0ca3;">
+      <padding>
+        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+      </padding>
+      <Label text="GhostTrack - Panneau d'Administration" textFill="WHITE">
+        <font>
+          <Font name="System Bold" size="20.0" />
+        </font>
+      </Label>
+      <Label text="Gestion des manifestations paranormales sur les zones ferroviaires" textFill="WHITE">
+        <font>
+          <Font size="12.0" />
+        </font>
+      </Label>
+    </VBox>
+  </top>
 
-  <Label text="Panneau d'Administration" textFill="#3a0ca3">
-    <font>
-      <Font name="System Bold" size="24.0" />
-    </font>
-  </Label>
+  <center>
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+      <Tab text="Manifestations en cours">
+        <BorderPane>
+          <center>
+            <TableView fx:id="tableManifestations">
+              <columns>
+                <TableColumn fx:id="colTrajet" text="Trajet" prefWidth="150.0" />
+                <TableColumn fx:id="colTypeFantome" text="Type de fantôme" prefWidth="150.0" />
+                <TableColumn fx:id="colDate" text="Date/Heure" prefWidth="150.0" />
+                <TableColumn fx:id="colDescription" text="Description" prefWidth="200.0" />
+                <TableColumn fx:id="colAgent" text="Agent assigné" prefWidth="120.0" />
+                <TableColumn fx:id="colMesure" text="Mesure préconisée" prefWidth="150.0" />
+              </columns>
+            </TableView>
+          </center>
+          <bottom>
+            <VBox spacing="10.0" style="-fx-background-color: #f2f2f2;">
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label text="Assigner un agent:" />
+                <ComboBox fx:id="comboAgents" prefWidth="200.0" />
+                <Button fx:id="btnAssignerAgent" text="Assigner l'agent" onAction="#onAssignerAgent" disable="true" />
+              </HBox>
+              <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label text="Préconiser une mesure:" />
+                <ComboBox fx:id="comboMesures" prefWidth="200.0" />
+                <Button fx:id="btnAssignerMesure" text="Associer la mesure" onAction="#onAssignerMesure" disable="true" />
+              </HBox>
+            </VBox>
+          </bottom>
+        </BorderPane>
+      </Tab>
 
-  <Label text="Cette vue sera développée dans les prochaines étapes">
-    <font>
-      <Font size="14.0" />
-    </font>
-  </Label>
-</VBox>
+      <Tab text="Historique des rapports">
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+          <VBox>
+            <HBox spacing="10.0" style="-fx-background-color: #f2f2f2;">
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+              <Label text="Date de début:" />
+              <DatePicker fx:id="dateDebut" />
+              <Label text="Date de fin:" />
+              <DatePicker fx:id="dateFin" />
+              <Label text="Type de fantôme:" />
+              <TextField fx:id="txtTypeFantome" prefWidth="150.0" />
+              <Label text="Agent:" />
+              <ComboBox fx:id="comboAgentFiltre" prefWidth="150.0" />
+              <Button fx:id="btnRechercher" text="Rechercher" onAction="#onRechercher" />
+              <Button fx:id="btnReinitialiser" text="Réinitialiser" onAction="#onReinitialiser" />
+            </HBox>
+            <TableView fx:id="tableRapports" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="colRapportDate" text="Date du rapport" prefWidth="150.0" />
+                <TableColumn fx:id="colRapportAgent" text="Agent" prefWidth="100.0" />
+                <TableColumn fx:id="colRapportType" text="Type de fantôme" prefWidth="150.0" />
+                <TableColumn fx:id="colRapportDescription" text="Description" prefWidth="250.0" />
+              </columns>
+            </TableView>
+          </VBox>
+          <VBox spacing="5.0">
+            <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Label text="Contenu du rapport:" style="-fx-font-weight: bold;" />
+            <TextArea fx:id="txtContenuRapport" VBox.vgrow="ALWAYS" editable="false" wrapText="true" />
+          </VBox>
+        </SplitPane>
+      </Tab>
+    </TabPane>
+  </center>
+
+  <bottom>
+    <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #f2f2f2;">
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <Label text="© 2025 GhostTrack - Tous droits réservés" textFill="#666666">
+        <font>
+          <Font size="10.0" />
+        </font>
+      </Label>
+    </HBox>
+  </bottom>
+</BorderPane>

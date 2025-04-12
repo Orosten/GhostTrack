@@ -4,10 +4,7 @@ import fr.esiee.ghosttrack.model.User;
 import fr.esiee.ghosttrack.service.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
@@ -33,35 +30,14 @@ public class LoginController {
             return;
         }
 
-        // Utilisation du service d'authentification
+        // Utilisation du service d'authentification avec la base de données
         User authenticatedUser = AuthService.authenticate(login, password);
 
         if (authenticatedUser != null) {
             try {
-                String viewToLoad;
-                String windowTitle;
-
-                // Redirection basée sur le rôle de l'utilisateur
-                if (authenticatedUser.isAdmin()) {
-                    viewToLoad = "admin-view.fxml";
-                    windowTitle = "GhostTrack - Administration";
-                } else {
-                    viewToLoad = "agent-view.fxml";
-                    windowTitle = "GhostTrack - Agent";
-                }
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(viewToLoad));
-                Parent root = loader.load();
-
-                // TODO: Passer l'utilisateur authentifié au contrôleur suivant
-
+                // Utiliser la méthode définie dans GhostTrackApplication pour charger la vue
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root, 800, 600);
-                stage.setTitle(windowTitle);
-                stage.setScene(scene);
-                stage.setResizable(true);
-                stage.show();
-
+                GhostTrackApplication.loadView(stage, authenticatedUser);
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert("Erreur", "Impossible de charger la page.");

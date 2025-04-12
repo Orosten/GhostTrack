@@ -1,24 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esiee.ghosttrack.controller.AgentController">
+    <top>
+        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #3a0ca3;">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label text="GhostTrack - Panneau Agent de Terrain" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Label>
+            <Label text="Gestion des interventions sur les manifestations paranormales" textFill="WHITE">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+    </top>
 
-    <Label text="Panneau Agent de Terrain" textFill="#3a0ca3">
-        <font>
-            <Font name="System Bold" size="24.0" />
-        </font>
-    </Label>
+    <center>
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+            <VBox>
+                <Label text="Manifestations paranormales assignées" style="-fx-font-weight: bold; -fx-padding: 5;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TableView fx:id="tableManifestations" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colTrajet" text="Trajet" prefWidth="150.0" />
+                        <TableColumn fx:id="colTypeFantome" text="Type de fantôme" prefWidth="150.0" />
+                        <TableColumn fx:id="colDate" text="Date/Heure" prefWidth="150.0" />
+                        <TableColumn fx:id="colDescription" text="Description" prefWidth="200.0" />
+                        <TableColumn fx:id="colMesure" text="Mesure préconisée" prefWidth="150.0" />
+                    </columns>
+                </TableView>
+            </VBox>
+            <VBox spacing="10.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Manifestation sélectionnée:" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblSelectedManifestation" style="-fx-text-fill: #3a0ca3;" />
+                </HBox>
+                <Label text="Rapport d'intervention:" style="-fx-font-weight: bold;" />
+                <TextArea fx:id="txtRapport" VBox.vgrow="ALWAYS" promptText="Saisissez ici votre rapport détaillé sur l'intervention..." wrapText="true" />
+                <HBox alignment="CENTER_RIGHT">
+                    <Button fx:id="btnGenererRapport" text="Générer le rapport PDF" onAction="#onGenererRapport" disable="true" style="-fx-background-color: #3a0ca3; -fx-text-fill: white;" />
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
 
-    <Label text="Cette vue sera développée dans les prochaines étapes">
-        <font>
-            <Font size="14.0" />
-        </font>
-    </Label>
-</VBox>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #f2f2f2;">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <Label text="© 2025 GhostTrack - Tous droits réservés" textFill="#666666">
+                <font>
+                    <Font size="10.0" />
+                </font>
+            </Label>
+        </HBox>
+    </bottom>
+</BorderPane>

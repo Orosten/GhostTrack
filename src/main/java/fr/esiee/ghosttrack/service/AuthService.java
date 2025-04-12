@@ -1,10 +1,11 @@
 package fr.esiee.ghosttrack.service;
 
+import fr.esiee.ghosttrack.dao.UserDAO;
 import fr.esiee.ghosttrack.model.User;
 
 /**
  * Service d'authentification pour GhostTrack
- * Cette classe sera remplacée par une implémentation avec accès à la base de données
+ * Utilise maintenant la base de données pour authentifier les utilisateurs
  */
 public class AuthService {
 
@@ -15,15 +16,8 @@ public class AuthService {
      * @return L'utilisateur authentifié ou null si l'authentification échoue
      */
     public static User authenticate(String login, String password) {
-        // Implémentation temporaire pour les tests
-        // À remplacer par une authentification réelle avec la base de données
-        if ("admin".equals(login) && "admin123".equals(password)) {
-            return new User(1, login, password, "ADMIN");
-        } else if ("agent".equals(login) && "agent123".equals(password)) {
-            return new User(2, login, password, "AGENT");
-        }
-
-        return null; // Authentification échouée
+        // Utiliser le DAO pour accéder à la base de données
+        return UserDAO.authenticate(login, password);
     }
 
     /**
