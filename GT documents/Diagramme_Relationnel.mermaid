@@ -1,0 +1,40 @@
+erDiagram
+    UTILISATEUR {
+      int idUtilisateur PK
+      string login
+      string motDePasse
+      string role
+    }
+    TRAJET {
+      int idTrajet PK
+      string nom
+      string statut
+    }
+    MANIFESTATION {
+      int idManifestation PK
+      datetime dateHeure
+      string typeFantome
+      string description
+      string statut
+      int idTrajet FK
+      int idAgent FK
+      int idMesure FK
+    }
+    RAPPORT {
+      int idRapport PK
+      datetime dateRapport
+      text contenu
+      string pdfPath
+      int idManifestation FK
+      int idAgent FK
+    }
+    MESURE {
+      int idMesure PK
+      string description
+    }
+
+    UTILISATEUR ||--o{ MANIFESTATION : "affecte"
+    UTILISATEUR ||--o{ RAPPORT : "rédige"
+    TRAJET ||--o{ MANIFESTATION : "contient"
+    MANIFESTATION ||--|| RAPPORT : "est référencée par"
+    MANIFESTATION }o--|| MESURE : "associe"
